@@ -1,7 +1,5 @@
 package modules
 
-import com.github.tototoshi.dbcache.DBCache
-import com.github.tototoshi.dbcache.play.DBCacheApi
 import play.api.cache.CacheApi
 import play.api.inject.{Binding, Module}
 import play.api.{Configuration, Environment}

@@ -83,12 +83,23 @@ Tue Apr 26 22:26:57 JST 2016: None
 ```
 
 
-## Play framework Support
+## With Play framework
 
 
 ```scala
-// with scalikejdbc
+// Create adapter for play.api.cache
+class DBCacheApi(myCache: DBCache) extends CacheApi {
+  def set(key: String, value: Any, expiration: Duration): Unit =
+    myCache.set(key, value, expiration)
+  def get[A](key: String)(implicit ct: ClassTag[A]): Option[A] =
+    myCache.get[A](key)
+  def getOrElse[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
+    myCache.getOrElse(key, expiration)(orElse)
+  def remove(key: String) = myCache.remove(key)
+}
+
 class MySQLCacheApiProvider @Inject() (connectionPool: ConnectionPool) extends Provider[CacheApi] {
+  // Set up ConnectionFactory with your favorite database library
   val connectionFactory = new ConnectionFactory {
     override def get(): Connection = connectionPool.borrow()
   }
@@ -98,11 +109,9 @@ class MySQLCacheApiProvider @Inject() (connectionPool: ConnectionPool) extends P
   }
 }
 
-
 class ApplicationModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = Seq(
     bind[CacheApi].toProvider[MySQLCacheApiProvider].eagerly(),
   )
 }
-
 ```

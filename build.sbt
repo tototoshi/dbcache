@@ -1,4 +1,4 @@
-name := """play-cache-jdbc"""
+name := """dbcache"""
 
 version := "1.0-SNAPSHOT"
 
@@ -17,14 +17,8 @@ lazy val commonDependencies = Seq(
   "org.mockito" % "mockito-all" % "2.0.2-beta" % "test"
 )
 
-def playDependencies(playVersion: String) = Seq(
-  "com.typesafe.play" %% "play" % playVersion % "provided",
-  "com.typesafe.play" %% "play-cache" % playVersion % "provided",
-  "com.typesafe.play" %% "play-jdbc" % playVersion % "provided"
-)
-
 lazy val root = (project in file("."))
-  .aggregate(core, play, mysql, postgresql)
+  .aggregate(core, mysql, postgresql)
 
 lazy val core = (project in file("core"))
   .settings(
@@ -45,13 +39,6 @@ lazy val postgresql = (project in file("postgresql"))
     name := "dbcache-postgresql",
     scalaVersion := "2.11.8",
     libraryDependencies ++= commonDependencies ++ postgresqlDependencies
-).dependsOn(core)
-
-lazy val play = (project in file("play"))
-  .settings(
-    name := "dbcache-play",
-    scalaVersion := "2.11.8",
-    libraryDependencies ++= commonDependencies ++ playDependencies(_root_.play.core.PlayVersion.current)
 ).dependsOn(core)
 
 lazy val example = (project in file("example"))
@@ -79,4 +66,4 @@ lazy val examplePlay = (project in file("example-play"))
       "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
     ),
     resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
-).dependsOn(play, mysql, postgresql)
+).dependsOn(mysql, postgresql)
