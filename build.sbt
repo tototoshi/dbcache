@@ -2,18 +2,13 @@ name := """dbcache"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val mysqlDependencies = Seq(
-  "mysql" % "mysql-connector-java" % "6.0.2" % "provided"
-)
+lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "6.0.2"
+lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "9.4.1208.jre7"
 
-lazy val postgresqlDependencies = Seq(
-  "org.postgresql" % "postgresql" % "9.4.1208.jre7"
-)
-
-lazy val commonDependencies = Seq(
-  "org.flywaydb" % "flyway-core" % "4.0",
+lazy val testDependencies = Seq(
+  "org.flywaydb" % "flyway-core" % "4.0" % "test",
   "org.scalatest" %% "scalatest" % "3.0.0-M15" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.12.5",
+  "org.scalacheck" %% "scalacheck" % "1.12.5" % "test",
   "org.mockito" % "mockito-all" % "2.0.2-beta" % "test"
 )
 
@@ -22,31 +17,35 @@ lazy val root = (project in file("."))
 
 lazy val core = (project in file("core"))
   .settings(
-    name := "dbcache",
+    name := "dbcache-core",
     scalaVersion := "2.11.8",
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= testDependencies
 )
 
 lazy val mysql = (project in file("mysql"))
   .settings(
     name := "dbcache-mysql",
     scalaVersion := "2.11.8",
-    libraryDependencies ++= commonDependencies ++ mysqlDependencies
+    libraryDependencies ++= testDependencies ++ Seq(
+      mysqlDependency % "provided"
+    )
 ).dependsOn(core)
 
 lazy val postgresql = (project in file("postgresql"))
   .settings(
     name := "dbcache-postgresql",
     scalaVersion := "2.11.8",
-    libraryDependencies ++= commonDependencies ++ postgresqlDependencies
+    libraryDependencies ++= testDependencies ++ Seq(
+      postgresqlDependency % "provided"
+    )
 ).dependsOn(core)
 
 lazy val example = (project in file("example"))
   .settings(
     name := "dbcache-example",
     scalaVersion := "2.11.8",
-    libraryDependencies ++= commonDependencies ++ Seq(
-      "mysql" % "mysql-connector-java" % "6.0.2"
+    libraryDependencies ++= testDependencies ++ Seq(
+      mysqlDependency
     )
 ).dependsOn(mysql)
 
@@ -56,12 +55,11 @@ lazy val examplePlay = (project in file("example-play"))
     name := "dbcache-example-play",
     scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
-      jdbc,
       cache,
-      ws,
+      mysqlDependency,
+      postgresqlDependency,
       "org.scalikejdbc" %% "scalikejdbc" % "2.3.5",
       "org.scalikejdbc" %% "scalikejdbc-config" % "2.3.5",
-      "mysql" % "mysql-connector-java" % "6.0.2",
       "org.flywaydb" %% "flyway-play" % "2.3.0",
       "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
     ),
