@@ -19,6 +19,7 @@ dbcache is a cache library which uses RDB (mysql and postgresql) as backend. it 
 
 
 ```sql
+-- mysql
 CREATE TABLE `cache_entries` (
   `key` varchar(191) PRIMARY KEY,
   `value` mediumblob NOT NULL,
@@ -27,6 +28,17 @@ CREATE TABLE `cache_entries` (
   INDEX (`expired_at`),
   INDEX (`created_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+-- postgresql
+CREATE TABLE cache_entries (
+  key varchar(191) PRIMARY KEY,
+  value bytea NOT NULL,
+  expired_at timestamp,
+  created_at timestamp NOT NULL
+);
+
+create index on cache_entries(expired_at);
+create index on cache_entries(created_at);
 ```
 
 You can add more constraint and index (for example: expired_at as NOT NULL).
