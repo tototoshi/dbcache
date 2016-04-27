@@ -2,6 +2,17 @@
 
 RDB as cache storage
 
+## Install
+
+```scala
+resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.1.0-SNAPSHOT"
+
+// or
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.1.0-SNAPSHOT"
+```
+
 ## Setup
 
 dbcache is a cache library which uses RDB (mysql and postgresql) as backend. it uses a table named `cache_entries` which has columns named `key`, `value`, `expired_at` and `created_at` like below.
