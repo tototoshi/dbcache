@@ -1,7 +1,5 @@
 name := """dbcache"""
 
-version := "1.0-SNAPSHOT"
-
 lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "6.0.2"
 lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "9.4.1208.jre7"
 
@@ -18,6 +16,8 @@ lazy val root = (project in file("."))
 lazy val core = (project in file("core"))
   .settings(
     name := "dbcache-core",
+    organization := "com.github.tototoshi",
+    version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies
 ).settings(Publish.settings)
@@ -25,6 +25,8 @@ lazy val core = (project in file("core"))
 lazy val mysql = (project in file("mysql"))
   .settings(
     name := "dbcache-mysql",
+    organization := "com.github.tototoshi",
+    version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       mysqlDependency % "provided"
@@ -34,6 +36,8 @@ lazy val mysql = (project in file("mysql"))
 lazy val postgresql = (project in file("postgresql"))
   .settings(
     name := "dbcache-postgresql",
+    organization := "com.github.tototoshi",
+    version := "0.1.0-SNAPSHOT",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       postgresqlDependency % "provided"
