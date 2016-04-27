@@ -20,7 +20,7 @@ lazy val core = (project in file("core"))
     name := "dbcache-core",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies
-)
+).settings(Publish.settings)
 
 lazy val mysql = (project in file("mysql"))
   .settings(
@@ -29,7 +29,7 @@ lazy val mysql = (project in file("mysql"))
     libraryDependencies ++= testDependencies ++ Seq(
       mysqlDependency % "provided"
     )
-).dependsOn(core)
+).settings(Publish.settings).dependsOn(core)
 
 lazy val postgresql = (project in file("postgresql"))
   .settings(
@@ -38,7 +38,7 @@ lazy val postgresql = (project in file("postgresql"))
     libraryDependencies ++= testDependencies ++ Seq(
       postgresqlDependency % "provided"
     )
-).dependsOn(core)
+).settings(Publish.settings).dependsOn(core)
 
 lazy val example = (project in file("example"))
   .settings(
