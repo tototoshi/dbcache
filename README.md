@@ -124,7 +124,11 @@ class DBCacheApi(myCache: DBCache) extends CacheApi {
 class MySQLCacheApiProvider @Inject() (connectionPool: ConnectionPool) extends Provider[CacheApi] {
   // Set up ConnectionFactory with your favorite database library
   val connectionFactory = new ConnectionFactory {
-    override def get(): Connection = connectionPool.borrow()
+    override def get(): Connection = {
+      val connection = connectionPool.borrow()
+      connection.setReadOnly(false)
+      connection
+    }
   }
   override def get(): CacheApi = {
     val mysqlCache = new MySQLCache(connectionFactory)
