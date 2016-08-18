@@ -11,26 +11,29 @@ class MySQLCacheDatabase(connectionFactory: ConnectionFactory) extends CacheData
 
   def set(entry: CacheEntry): Unit = using(connectionFactory.get()) { connection =>
     val expiredAt = entry.expiration.map(new Timestamp(_)).orNull
-    val createdAt = new Timestamp(now)
+    val timestamp = new Timestamp(now)
+    val createdAt = timestamp
+    val updatedAt = timestamp
     val stmt = connection.prepareStatement(
       """
         |INSERT INTO
-        |  `cache_entries`(`cache_key`, `cache_value`, `expired_at`, `created_at`)
+        |  `cache_entries`(`cache_key`, `cache_value`, `expired_at`, `created_at`, `updated_at`)
         |VALUES
-        |  (?, ?, ?, ?)
+        |  (?, ?, ?, ?, ?)
         |ON DUPLICATE KEY UPDATE
         |  `cache_value` = ?,
         |  `expired_at` = ?,
-        |  `created_at` = ?
+        |  `updated_at` = ?
         |
       """.stripMargin)
     stmt.setString(1, entry.key)
     stmt.setBytes(2, entry.value)
     stmt.setTimestamp(3, expiredAt)
     stmt.setTimestamp(4, createdAt)
-    stmt.setBytes(5, entry.value)
-    stmt.setTimestamp(6, expiredAt)
-    stmt.setTimestamp(7, createdAt)
+    stmt.setTimestamp(5, updatedAt)
+    stmt.setBytes(6, entry.value)
+    stmt.setTimestamp(7, expiredAt)
+    stmt.setTimestamp(8, updatedAt)
     stmt.executeUpdate()
   }
 
