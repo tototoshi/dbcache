@@ -15,11 +15,11 @@ class MySQLCacheDatabase(connectionFactory: ConnectionFactory) extends CacheData
     val stmt = connection.prepareStatement(
       """
         |INSERT INTO
-        |  `cache_entries`(`key`, `value`, `expired_at`, `created_at`)
+        |  `cache_entries`(`cache_key`, `cache_value`, `expired_at`, `created_at`)
         |VALUES
         |  (?, ?, ?, ?)
         |ON DUPLICATE KEY UPDATE
-        |  `value` = ?,
+        |  `cache_value` = ?,
         |  `expired_at` = ?,
         |  `created_at` = ?
         |
@@ -39,11 +39,13 @@ class MySQLCacheDatabase(connectionFactory: ConnectionFactory) extends CacheData
       val stmt = connection.prepareStatement(
         """
           |SELECT
-          |  *
+          |  `cache_key`,
+          |  `cache_value`,
+          |  `expired_at`
           |FROM
           |  `cache_entries`
           |WHERE
-          |  `key` = ?
+          |  `cache_key` = ?
           |  AND (`expired_at` IS NULL OR `expired_at` > ?)
         """.stripMargin)
       stmt.setString(1, key)
@@ -60,7 +62,7 @@ class MySQLCacheDatabase(connectionFactory: ConnectionFactory) extends CacheData
 
   def remove(key: String): Unit = {
     using(connectionFactory.get()) { connection =>
-      val stmt = connection.prepareStatement("DELETE FROM `cache_entries` WHERE `key` = ?")
+      val stmt = connection.prepareStatement("DELETE FROM `cache_entries` WHERE `cache_key` = ?")
       stmt.setString(1, key)
       stmt.executeUpdate()
     }
@@ -68,8 +70,8 @@ class MySQLCacheDatabase(connectionFactory: ConnectionFactory) extends CacheData
 
   private def mapping(rs: ResultSet): CacheEntry =
     CacheEntry(
-      rs.getString("key"),
-      rs.getBytes("value"),
+      rs.getString("cache_key"),
+      rs.getBytes("cache_value"),
       Option(rs.getTimestamp("expired_at")).map(_.getTime)
     )
 }

@@ -21,8 +21,8 @@ dbcache is a cache library which uses RDB (mysql and postgresql) as backend. it 
 ```sql
 -- mysql
 CREATE TABLE `cache_entries` (
-  `key` varchar(191) PRIMARY KEY,
-  `value` mediumblob NOT NULL,
+  `cache_key` varchar(191) PRIMARY KEY,
+  `cache_value` mediumblob NOT NULL,
   `expired_at` datetime,
   `created_at` datetime NOT NULL,
   INDEX (`expired_at`),
@@ -31,8 +31,8 @@ CREATE TABLE `cache_entries` (
 
 -- postgresql
 CREATE TABLE cache_entries (
-  key varchar(191) PRIMARY KEY,
-  value bytea NOT NULL,
+  cache_key varchar(191) PRIMARY KEY,
+  cache_value bytea NOT NULL,
   expired_at timestamp,
   created_at timestamp NOT NULL
 );
