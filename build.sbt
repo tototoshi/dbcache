@@ -49,9 +49,10 @@ lazy val example = (project in file("example"))
     name := "dbcache-example",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
-      mysqlDependency
+      mysqlDependency,
+      postgresqlDependency
     )
-).dependsOn(mysql)
+).dependsOn(mysql, postgresql)
 
 lazy val examplePlay = (project in file("example-play"))
   .enablePlugins(PlayScala)
