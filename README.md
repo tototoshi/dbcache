@@ -25,8 +25,8 @@ CREATE TABLE `cache_entries` (
   `cache_value` mediumblob NOT NULL,
   `expired_at` datetime,
   `created_at` datetime NOT NULL,
-  INDEX (`expired_at`),
-  INDEX (`created_at`)
+  `updated_at` datetime NOT NULL,
+  INDEX (`expired_at`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
 
 -- postgresql
@@ -34,11 +34,11 @@ CREATE TABLE cache_entries (
   cache_key varchar(191) PRIMARY KEY,
   cache_value bytea NOT NULL,
   expired_at timestamp,
-  created_at timestamp NOT NULL
+  created_at timestamp NOT NULL,
+  updated_at timestamp NOT NULL
 );
 
 create index on cache_entries(expired_at);
-create index on cache_entries(created_at);
 ```
 
 You can add more constraint and index (for example: expired_at as NOT NULL).
