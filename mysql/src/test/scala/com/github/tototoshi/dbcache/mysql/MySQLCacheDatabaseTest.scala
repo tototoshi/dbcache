@@ -22,6 +22,7 @@ class MySQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control
       val flyway = new Flyway()
       flyway.setDataSource(url, name, password)
       flyway.setLocations("migration/mysql")
+      flyway.clean()
       flyway.migrate()
     }
 
