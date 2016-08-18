@@ -56,4 +56,10 @@ object Publish {
     pomExtra := _pomExtra
   )
 
+  val nonPublishSettings = Seq(
+    publishArtifact := false,
+    publish := {},
+    publishLocal := {}
+  )
+
 }

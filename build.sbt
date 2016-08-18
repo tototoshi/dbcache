@@ -11,6 +11,11 @@ lazy val testDependencies = Seq(
 )
 
 lazy val root = (project in file("."))
+  .settings(
+    name := "dbcache",
+    organization := "com.github.tototoshi"
+  )
+  .settings(Publish.nonPublishSettings)
   .aggregate(core, mysql, postgresql)
 
 lazy val core = (project in file("core"))
