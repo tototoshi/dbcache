@@ -5,10 +5,10 @@ RDB as cache storage
 ## Install
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.1.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.1.1"
 
 // or
-// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.1.0"
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.1.1"
 ```
 
 ## Setup

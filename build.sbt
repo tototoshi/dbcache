@@ -22,7 +22,7 @@ lazy val core = (project in file("core"))
   .settings(
     name := "dbcache-core",
     organization := "com.github.tototoshi",
-    version := "0.1.0",
+    version := "0.1.1",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies
 ).settings(Publish.settings)
@@ -31,7 +31,7 @@ lazy val mysql = (project in file("mysql"))
   .settings(
     name := "dbcache-mysql",
     organization := "com.github.tototoshi",
-    version := "0.1.0",
+    version := "0.1.1",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       mysqlDependency % "provided"
@@ -42,7 +42,7 @@ lazy val postgresql = (project in file("postgresql"))
   .settings(
     name := "dbcache-postgresql",
     organization := "com.github.tototoshi",
-    version := "0.1.0",
+    version := "0.1.1",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       postgresqlDependency % "provided"
