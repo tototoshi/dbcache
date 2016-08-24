@@ -34,7 +34,7 @@ lazy val mysql = (project in file("mysql"))
     version := "0.1.0",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
-      mysqlDependency % "runtime"
+      mysqlDependency % "provided"
     )
 ).settings(Publish.settings).dependsOn(core)
 
@@ -45,7 +45,7 @@ lazy val postgresql = (project in file("postgresql"))
     version := "0.1.0",
     scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
-      postgresqlDependency % "runtime"
+      postgresqlDependency % "provided"
     )
 ).settings(Publish.settings).dependsOn(core)
 
