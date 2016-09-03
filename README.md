@@ -5,10 +5,10 @@ RDB as cache storage
 ## Install
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.1.1"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.2.0"
 
 // or
-// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.1.1"
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.2.0"
 ```
 
 ## Setup
@@ -119,7 +119,10 @@ class DBCacheApi(myCache: DBCache) extends CacheApi {
   def remove(key: String) = myCache.remove(key)
 }
 
-class MySQLCacheApiProvider @Inject() (connectionPool: ConnectionPool) extends Provider[CacheApi] {
+class MySQLCacheApiProvider @Inject() (
+  environment: Environment,
+  connectionPool: ConnectionPool
+) extends Provider[CacheApi] {
   // Set up ConnectionFactory with your favorite database library
   val connectionFactory = new ConnectionFactory {
     override def get(): Connection = {
@@ -129,7 +132,7 @@ class MySQLCacheApiProvider @Inject() (connectionPool: ConnectionPool) extends P
     }
   }
   override def get(): CacheApi = {
-    val mysqlCache = new MySQLCache(connectionFactory)
+    val mysqlCache = new MySQLCache(connectionFactory, environment.classLoader)
     new DBCacheApi(mysqlCache)
   }
 }
