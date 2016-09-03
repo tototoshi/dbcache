@@ -2,11 +2,11 @@ package com.github.tototoshi.dbcache
 
 import scala.concurrent.duration.Duration
 
-trait DBCache {
+abstract class DBCache(cacheDatabase: CacheDatabase, classLoader: ClassLoader) {
 
-  protected val cacheDatabase: CacheDatabase
+  def this(cacheDatabase: CacheDatabase) = this(cacheDatabase, null)
 
-  protected val serializer = new Serializer
+  private val serializer = new Serializer(classLoader)
 
   def now = System.currentTimeMillis()
 
