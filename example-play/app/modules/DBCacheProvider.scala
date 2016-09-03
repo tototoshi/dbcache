@@ -19,7 +19,11 @@ class MySQLCacheApiProvider @Inject()(
 ) extends Provider[CacheApi] {
 
   val connectionFactory = new ConnectionFactory {
-    override def get(): Connection = connectionPool.borrow()
+    override def get(): Connection = {
+      val connection = connectionPool.borrow()
+      connection.setReadOnly(false)
+      connection
+    }
   }
 
   override def get(): CacheApi = {
@@ -35,7 +39,11 @@ class PostgreSQLCacheApi @Inject()(
 ) extends Provider[CacheApi] {
 
   val connectionFactory = new ConnectionFactory {
-    override def get(): Connection = connectionPool.borrow()
+    override def get(): Connection = {
+      val connection = connectionPool.borrow()
+      connection.setReadOnly(false)
+      connection
+    }
   }
 
   override def get(): CacheApi = {
