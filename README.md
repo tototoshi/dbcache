@@ -107,6 +107,8 @@ Tue Apr 26 22:26:57 JST 2016: None
 ## With Play framework
 
 
+Play integration example with scalikejdbc
+
 ```scala
 // Create adapter for play.api.cache
 class DBCacheApi(myCache: DBCache) extends CacheApi {
