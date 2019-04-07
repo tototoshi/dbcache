@@ -6,8 +6,7 @@ lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "9.4.1208.jre7
 lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % "4.0" % "test",
   "org.scalatest" %% "scalatest" % "3.0.0-M15" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.12.5" % "test",
-  "org.mockito" % "mockito-all" % "2.0.2-beta" % "test"
+  "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
 )
 
 lazy val root = (project in file("."))
