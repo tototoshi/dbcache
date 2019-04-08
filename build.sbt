@@ -9,49 +9,53 @@ lazy val testDependencies = Seq(
   "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
 )
 
+lazy val commonSettings = Seq(
+  organization := "com.github.tototoshi",
+  scalaVersion := "2.11.8",
+  version := "0.2.0"
+)
+
 lazy val root = (project in file("."))
-  .settings(
-    name := "dbcache",
-    organization := "com.github.tototoshi"
-  )
+  .settings(commonSettings)
   .settings(Publish.nonPublishSettings)
+  .settings(
+    name := "dbcache"
+  )
   .aggregate(core, mysql, postgresql)
 
 lazy val core = (project in file("core"))
+  .settings(commonSettings)
+  .settings(Publish.settings)
   .settings(
     name := "dbcache-core",
-    organization := "com.github.tototoshi",
-    version := "0.2.0",
-    scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies
-).settings(Publish.settings)
+)
 
 lazy val mysql = (project in file("mysql"))
+  .settings(commonSettings)
+  .settings(Publish.settings)
   .settings(
     name := "dbcache-mysql",
-    organization := "com.github.tototoshi",
-    version := "0.2.0",
-    scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       mysqlDependency % "provided"
     )
-).settings(Publish.settings).dependsOn(core)
+).dependsOn(core)
 
 lazy val postgresql = (project in file("postgresql"))
+  .settings(commonSettings)
+  .settings(Publish.settings)
   .settings(
     name := "dbcache-postgresql",
-    organization := "com.github.tototoshi",
-    version := "0.2.0",
-    scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       postgresqlDependency % "provided"
     )
-).settings(Publish.settings).dependsOn(core)
+).dependsOn(core)
 
 lazy val example = (project in file("example"))
+  .settings(commonSettings)
+  .settings(Publish.nonPublishSettings)
   .settings(
     name := "dbcache-example",
-    scalaVersion := "2.11.8",
     libraryDependencies ++= testDependencies ++ Seq(
       mysqlDependency,
       postgresqlDependency
@@ -60,9 +64,10 @@ lazy val example = (project in file("example"))
 
 lazy val examplePlay = (project in file("example-play"))
   .enablePlugins(PlayScala)
+  .settings(commonSettings)
+  .settings(Publish.nonPublishSettings)
   .settings(
     name := "dbcache-example-play",
-    scalaVersion := "2.11.8",
     libraryDependencies ++= Seq(
       cache,
       mysqlDependency,

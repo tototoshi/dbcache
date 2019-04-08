@@ -3,11 +3,11 @@ import Keys._
 
 object Publish {
 
-  private val url = "http://github.com/tototoshi/dbcache"
+  private val url = "https://github.com/tototoshi/dbcache"
 
   private object License {
     val name = "Apache License, Version 2.0"
-    val url = "http://www.apache.org/licenses/LICENSE-2.0.html"
+    val url = "https://www.apache.org/licenses/LICENSE-2.0.html"
     val distribution = "repo"
   }
 
@@ -19,7 +19,7 @@ object Publish {
   private object Developer {
     val id = "tototoshi"
     val name = "Toshiyuki Takahashi"
-    val url = "http://tototoshi.github.io"
+    val url = "https://tototoshi.github.io"
   }
 
   private def _publishTo(v: String) = {
