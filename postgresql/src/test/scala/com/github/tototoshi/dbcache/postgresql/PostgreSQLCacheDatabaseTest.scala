@@ -12,10 +12,10 @@ class PostgreSQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Co
 
   override type FixtureParam = ConnectionFactory
 
-  val driver   = sys.env.getOrElse("DB_TEST_POSTGRES_DRIVER"  , sys.error("environment variable DB_TEST_POSTGRES_DRIVER is not set"))
-  val url      = sys.env.getOrElse("DB_TEST_POSTGRES_URL"     , sys.error("environment variable DB_TEST_POSTGRES_URL is not set"))
-  val name     = sys.env.getOrElse("DB_TEST_POSTGRES_USER"    , sys.error("environment variable DB_TEST_POSTGRES_USER is not set"))
-  val password = sys.env.getOrElse("DB_TEST_POSTGRES_PASSWORD", sys.error("environment variable DB_TEST_POSTGRES_PASSWORD is not set"))
+  val driver   = sys.env.getOrElse("DB_TEST_POSTGRES_DRIVER"  , "org.postgresql.Driver")
+  val url      = sys.env.getOrElse("DB_TEST_POSTGRES_URL"     , "jdbc:postgresql://localhost:5432/dbcache_test")
+  val name     = sys.env.getOrElse("DB_TEST_POSTGRES_USER"    , "postgres")
+  val password = sys.env.getOrElse("DB_TEST_POSTGRES_PASSWORD", "")
 
   override protected def withFixture(test: OneArgTest): Outcome = {
 
