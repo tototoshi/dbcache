@@ -1,5 +1,7 @@
 # dbcache
 
+[![Build Status](https://travis-ci.org/tototoshi/dbcache.svg?branch=master)](https://travis-ci.org/tototoshi/dbcache)
+
 RDB as cache storage
 
 ## Install
