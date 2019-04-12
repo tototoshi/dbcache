@@ -4,10 +4,14 @@ scala:
 jdk:
   - oraclejdk8
 script:
-   - sbt ++$TRAVIS_SCALA_VERSION core/test postgresql/test
+   - sbt ++$TRAVIS_SCALA_VERSION test
+
+services:
+  - mysql
 
 addons:
   postgresql: "9.6"
 
 before_script:
   - psql -c 'create database dbcache_test;' -U postgres
+  - mysql -utravis -e 'create database if not exists dbcache_test;'
