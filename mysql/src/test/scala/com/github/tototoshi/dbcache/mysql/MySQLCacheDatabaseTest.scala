@@ -11,10 +11,10 @@ class MySQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control
 
   override type FixtureParam = ConnectionFactory
 
-  val driver   = sys.env.getOrElse("DB_TEST_MYSQL_DRIVER"  , sys.error("environment variable DB_TEST_MYSQL_DRIVER is not set"))
-  val url      = sys.env.getOrElse("DB_TEST_MYSQL_URL"     , sys.error("environment variable DB_TEST_MYSQL_URL is not set"))
-  val name     = sys.env.getOrElse("DB_TEST_MYSQL_USER"    , sys.error("environment variable DB_TEST_MYSQL_USER is not set"))
-  val password = sys.env.getOrElse("DB_TEST_MYSQL_PASSWORD", sys.error("environment variable DB_TEST_MYSQL_PASSWORD is not set"))
+  val driver   = sys.env.getOrElse("DB_TEST_MYSQL_DRIVER"  , "com.mysql.jdbc.Driver")
+  val url      = sys.env.getOrElse("DB_TEST_MYSQL_URL"     , "jdbc:mysql://localhost/dbcache_test")
+  val name     = sys.env.getOrElse("DB_TEST_MYSQL_USER"    , "travis")
+  val password = sys.env.getOrElse("DB_TEST_MYSQL_PASSWORD", "")
 
   override protected def withFixture(test: OneArgTest): Outcome = {
 
