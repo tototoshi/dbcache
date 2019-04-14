@@ -1,6 +1,6 @@
 package modules
 
-import play.api.cache.CacheApi
+import play.api.cache.SyncCacheApi
 import play.api.inject.{Binding, Module}
 import play.api.{Configuration, Environment}
 import scalikejdbc.ConnectionPool
@@ -15,8 +15,8 @@ class ApplicationModule extends Module {
     bind[ConnectionPoolShutdown].toSelf.eagerly(),
 
     // DBCache
-    bind[CacheApi].qualifiedWith("mysql").toProvider[MySQLCacheApiProvider].eagerly(),
-    bind[CacheApi].qualifiedWith("postgresql").toProvider[PostgreSQLCacheApi].eagerly()
+    bind[SyncCacheApi].qualifiedWith("mysql").toProvider[MySQLCacheApiProvider].eagerly(),
+    bind[SyncCacheApi].qualifiedWith("postgresql").toProvider[PostgreSQLCacheApi].eagerly()
   )
 
 }

@@ -72,10 +72,8 @@ lazy val examplePlay = (project in file("example-play"))
       cache,
       mysqlDependency,
       postgresqlDependency,
-      "org.scalikejdbc" %% "scalikejdbc" % "2.3.5",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "2.3.5",
-      "org.flywaydb" %% "flyway-play" % "2.3.0",
-      "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
-    ),
-    resolvers += "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
+      "org.scalikejdbc" %% "scalikejdbc" % "3.3.4",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "3.3.4",
+      "org.flywaydb" %% "flyway-play" % "5.3.2"
+    )
 ).dependsOn(mysql, postgresql)

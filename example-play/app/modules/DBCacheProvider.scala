@@ -7,7 +7,7 @@ import com.github.tototoshi.dbcache.mysql.MySQLCache
 import com.github.tototoshi.dbcache.postgresql.PostgreSQLCache
 import com.github.tototoshi.dbcache.{ ConnectionFactory, DBCache }
 import play.api.Environment
-import play.api.cache.CacheApi
+import play.api.cache.SyncCacheApi
 import scalikejdbc.ConnectionPool
 
 import scala.concurrent.duration.Duration
@@ -16,7 +16,7 @@ import scala.reflect.ClassTag
 class MySQLCacheApiProvider @Inject()(
   @Named("mysql") connectionPool: ConnectionPool,
   environment: Environment
-) extends Provider[CacheApi] {
+) extends Provider[SyncCacheApi] {
 
   val connectionFactory = new ConnectionFactory {
     override def get(): Connection = {
@@ -26,7 +26,7 @@ class MySQLCacheApiProvider @Inject()(
     }
   }
 
-  override def get(): CacheApi = {
+  override def get(): SyncCacheApi = {
     val mysqlCache = new MySQLCache(connectionFactory, environment.classLoader)
     new DBCacheApi(mysqlCache)
   }
@@ -36,7 +36,7 @@ class MySQLCacheApiProvider @Inject()(
 class PostgreSQLCacheApi @Inject()(
   @Named("postgresql") connectionPool: ConnectionPool,
   environment: Environment
-) extends Provider[CacheApi] {
+) extends Provider[SyncCacheApi] {
 
   val connectionFactory = new ConnectionFactory {
     override def get(): Connection = {
@@ -46,14 +46,14 @@ class PostgreSQLCacheApi @Inject()(
     }
   }
 
-  override def get(): CacheApi = {
+  override def get(): SyncCacheApi = {
     val postgresqlCache = new PostgreSQLCache(connectionFactory, environment.classLoader)
     new DBCacheApi(postgresqlCache)
   }
 
 }
 
-class DBCacheApi(myCache: DBCache) extends CacheApi {
+class DBCacheApi(myCache: DBCache) extends SyncCacheApi {
 
   def set(key: String, value: Any, expiration: Duration): Unit =
     myCache.set(key, value, expiration)
@@ -61,7 +61,7 @@ class DBCacheApi(myCache: DBCache) extends CacheApi {
   def get[A](key: String)(implicit ct: ClassTag[A]): Option[A] =
     myCache.get[A](key)
 
-  def getOrElse[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
+  def getOrElseUpdate[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
     myCache.getOrElse(key, expiration)(orElse)
 
   def remove(key: String) = myCache.remove(key)

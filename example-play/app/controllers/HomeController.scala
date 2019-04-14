@@ -1,18 +1,19 @@
 package controllers
 
 import java.util.concurrent.TimeUnit
-import javax.inject._
 
-import play.api.cache.CacheApi
+import javax.inject._
+import play.api.cache.SyncCacheApi
 import play.api.mvc._
 
 import scala.concurrent.duration.Duration
 
 @Singleton
 class HomeController @Inject() (
-    @Named("mysql") mysqlCacheApi: CacheApi,
-    @Named("postgresql") postgresqlCacheApi: CacheApi
-) extends Controller {
+    cc: ControllerComponents,
+    @Named("mysql") mysqlCacheApi: SyncCacheApi,
+    @Named("postgresql") postgresqlCacheApi: SyncCacheApi
+) extends AbstractController(cc) {
 
   def index = Action {
     Ok
