@@ -12,7 +12,7 @@ lazy val testDependencies = Seq(
 lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalaVersion := "2.11.8",
-  version := "0.2.0"
+  version := "0.3.0-SNAPSHOT"
 )
 
 lazy val root = (project in file("."))
