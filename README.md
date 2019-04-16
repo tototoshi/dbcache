@@ -113,20 +113,25 @@ Play integration example with scalikejdbc
 
 ```scala
 // Create adapter for play.api.cache
-class DBCacheApi(myCache: DBCache) extends CacheApi {
+class DBCacheApi(myCache: DBCache) extends SyncCacheApi {
+
   def set(key: String, value: Any, expiration: Duration): Unit =
     myCache.set(key, value, expiration)
+
   def get[A](key: String)(implicit ct: ClassTag[A]): Option[A] =
     myCache.get[A](key)
-  def getOrElse[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
+
+  def getOrElseUpdate[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
     myCache.getOrElse(key, expiration)(orElse)
+
   def remove(key: String) = myCache.remove(key)
+
 }
 
 class MySQLCacheApiProvider @Inject() (
   environment: Environment,
   connectionPool: ConnectionPool
-) extends Provider[CacheApi] {
+) extends Provider[SyncCacheApi] {
   // Set up ConnectionFactory with your favorite database library
   val connectionFactory = new ConnectionFactory {
     override def get(): Connection = {
@@ -135,7 +140,7 @@ class MySQLCacheApiProvider @Inject() (
       connection
     }
   }
-  override def get(): CacheApi = {
+  override def get(): SyncCacheApi = {
     val mysqlCache = new MySQLCache(connectionFactory, environment.classLoader)
     new DBCacheApi(mysqlCache)
   }
@@ -143,7 +148,7 @@ class MySQLCacheApiProvider @Inject() (
 
 class ApplicationModule extends Module {
   override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = Seq(
-    bind[CacheApi].toProvider[MySQLCacheApiProvider].eagerly(),
+    bind[SyncCacheApi].toProvider[MySQLCacheApiProvider].eagerly(),
   )
 }
 ```
