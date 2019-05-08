@@ -15,7 +15,7 @@ class PostgreSQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Co
   val driver   = sys.env.getOrElse("DB_TEST_POSTGRES_DRIVER"  , "org.postgresql.Driver")
   val url      = sys.env.getOrElse("DB_TEST_POSTGRES_URL"     , "jdbc:postgresql://localhost:5432/dbcache_test")
   val name     = sys.env.getOrElse("DB_TEST_POSTGRES_USER"    , "postgres")
-  val password = sys.env.getOrElse("DB_TEST_POSTGRES_PASSWORD", "")
+  val password = sys.env.getOrElse("DB_TEST_POSTGRES_PASSWORD", "password")
 
   override protected def withFixture(test: OneArgTest): Outcome = {
 
