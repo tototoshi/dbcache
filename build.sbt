@@ -22,7 +22,7 @@ lazy val root = (project in file("."))
   .settings(
     name := "dbcache"
   )
-  .aggregate(core, mysql, postgresql)
+  .aggregate(core, mysql, postgresql, play)
 
 lazy val core = (project in file("core"))
   .settings(commonSettings)
@@ -52,6 +52,16 @@ lazy val postgresql = (project in file("postgresql"))
     )
 ).dependsOn(core)
 
+lazy val play = (project in file("play"))
+  .settings(commonSettings)
+  .settings(Publish.settings)
+  .settings(
+    name := "dbcache-play",
+    libraryDependencies ++= testDependencies ++ Seq(
+      cache
+    )
+).dependsOn(core)
+
 lazy val example = (project in file("example"))
   .settings(commonSettings)
   .settings(Publish.nonPublishSettings)
@@ -70,11 +80,11 @@ lazy val examplePlay = (project in file("example-play"))
   .settings(
     name := "dbcache-example-play",
     libraryDependencies ++= Seq(
-      cache,
+      guice,
       mysqlDependency,
       postgresqlDependency,
       "org.scalikejdbc" %% "scalikejdbc" % "3.3.4",
       "org.scalikejdbc" %% "scalikejdbc-config" % "3.3.4",
       "org.flywaydb" %% "flyway-play" % "5.3.2"
     )
-).dependsOn(mysql, postgresql)
+).dependsOn(mysql, postgresql, play)

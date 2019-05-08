@@ -4,6 +4,7 @@ import java.sql.Connection
 
 import com.github.tototoshi.dbcache.ConnectionFactory
 import com.github.tototoshi.dbcache.mysql.MySQLCache
+import com.github.tototoshi.dbcache.play.DBCacheApi
 import com.github.tototoshi.dbcache.postgresql.PostgreSQLCache
 import javax.inject.{Inject, Named, Provider}
 import play.api.Environment
