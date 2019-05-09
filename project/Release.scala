@@ -43,13 +43,15 @@ object Publish {
       </developer>
     </developers>
 
+  private def _publishTo(version: String) = {
+      val nexus = "https://oss.sonatype.org/"
+      if (version.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  }
+
   val settings = Seq(
     publishMavenStyle := true,
-    publishTo := {
-      val nexus = "https://oss.sonatype.org/"
-      if (version.value.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
-      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-    },
+    publishTo := _publishTo(version.value),
     publishArtifact in Test := false,
     pomExtra := _pomExtra
   )
@@ -57,6 +59,7 @@ object Publish {
   val nonPublishSettings = Seq(
     publishArtifact := false,
     publish := {},
+    publishTo := _publishTo(version.value),
     publishLocal := {}
   )
 
