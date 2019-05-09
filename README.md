@@ -7,10 +7,10 @@ RDB as cache storage
 ## Install
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.2.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.3.0-SNAPSHOT"
 
 // or
-// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.2.0"
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.3.0-SNAPSHOT"
 ```
 
 ## Setup
@@ -108,26 +108,15 @@ Tue Apr 26 22:26:57 JST 2016: None
 
 ## With Play framework
 
-
-Play integration example with scalikejdbc
+Add dbcache-play to dependencies.
 
 ```scala
-// Create adapter for play.api.cache
-class DBCacheApi(myCache: DBCache) extends SyncCacheApi {
+libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "0.3.0-SNAPSHOT"
+```
 
-  def set(key: String, value: Any, expiration: Duration): Unit =
-    myCache.set(key, value, expiration)
+The code below is Play integration example with scalikejdbc
 
-  def get[A](key: String)(implicit ct: ClassTag[A]): Option[A] =
-    myCache.get[A](key)
-
-  def getOrElseUpdate[A: ClassTag](key: String, expiration: Duration)(orElse: => A) =
-    myCache.getOrElse(key, expiration)(orElse)
-
-  def remove(key: String) = myCache.remove(key)
-
-}
-
+```scala
 class MySQLCacheApiProvider @Inject() (
   environment: Environment,
   connectionPool: ConnectionPool
