@@ -1,4 +1,4 @@
-package modules
+package com.github.tototoshi.dbcache.play
 
 import akka.Done
 import com.github.tototoshi.dbcache.DBCache
