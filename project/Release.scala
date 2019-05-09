@@ -22,12 +22,6 @@ object Publish {
     val url = "https://tototoshi.github.io"
   }
 
-  private def _publishTo(v: String) = {
-    val nexus = "https://oss.sonatype.org/"
-    if (v.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
-    else Some("releases" at nexus + "service/local/staging/deploy/maven2")
-  }
-
   private val _pomExtra =
     <url>{ url }</url>
     <licenses>
@@ -49,9 +43,15 @@ object Publish {
       </developer>
     </developers>
 
+  private def _publishTo(version: String) = {
+      val nexus = "https://oss.sonatype.org/"
+      if (version.trim.endsWith("SNAPSHOT")) Some("snapshots" at nexus + "content/repositories/snapshots")
+      else Some("releases" at nexus + "service/local/staging/deploy/maven2")
+  }
+
   val settings = Seq(
     publishMavenStyle := true,
-    publishTo <<= version { (v: String) => _publishTo(v) },
+    publishTo := _publishTo(version.value),
     publishArtifact in Test := false,
     pomExtra := _pomExtra
   )
@@ -59,6 +59,7 @@ object Publish {
   val nonPublishSettings = Seq(
     publishArtifact := false,
     publish := {},
+    publishTo := _publishTo(version.value),
     publishLocal := {}
   )
 
