@@ -117,16 +117,21 @@ libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "0.3.0-SNAPSHO
 The code below is Play integration example with scalikejdbc
 
 ```scala
-class MySQLCacheApiProvider @Inject() (
-  environment: Environment,
-  connectionPool: ConnectionPool
-) extends Provider[SyncCacheApi] {
-  // Set up ConnectionFactory with your favorite database library
-  val connectionFactory = new ConnectionFactory {
+import java.sql.Connection
+
+import com.github.tototoshi.dbcache.ConnectionFactory
+import com.github.tototoshi.dbcache.mysql.MySQLCache
+import com.github.tototoshi.dbcache.play.DBCacheApi
+import javax.inject.{Inject, Provider}
+import play.api.Environment
+import play.api.cache.SyncCacheApi
+import scalikejdbc.DB
+
+class MySQLCacheApiProvider @Inject()(environment: Environment) extends Provider[SyncCacheApi] {
+
+  private val connectionFactory = new ConnectionFactory {
     override def get(): Connection = {
-      val connection = connectionPool.borrow()
-      connection.setReadOnly(false)
-      connection
+      DB.autoCommitSession().connection
     }
   }
   override def get(): SyncCacheApi = {
@@ -134,10 +139,11 @@ class MySQLCacheApiProvider @Inject() (
     new DBCacheApi(mysqlCache)
   }
 }
-
-class ApplicationModule extends Module {
-  override def bindings(environment: Environment, configuration: Configuration): Seq[Binding[_]] = Seq(
-    bind[SyncCacheApi].toProvider[MySQLCacheApiProvider].eagerly(),
-  )
-}
 ```
+
+Disable EhCache which is the default cache backend of Play 2.7.
+
+```
+play.modules.disabled += "play.api.cache.ehcache.EhCacheModule"
+```
+
