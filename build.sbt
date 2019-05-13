@@ -13,7 +13,7 @@ lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalaVersion := "2.12.8",
   crossScalaVersions := Seq("2.12.8", "2.11.12"),
-  version := "0.3.0-SNAPSHOT"
+  version := "0.3.0"
 )
 
 lazy val root = (project in file("."))
