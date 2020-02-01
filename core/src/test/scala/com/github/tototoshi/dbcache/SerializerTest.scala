@@ -2,12 +2,12 @@ package com.github.tototoshi.dbcache
 
 import java.io.NotSerializableException
 
-import org.scalatest.FunSuite
-import org.scalatest.prop.PropertyChecks
+import org.scalatestplus.scalacheck.ScalaCheckPropertyChecks
+import org.scalatest.funsuite.AnyFunSuite
 
 case class CaseClass(a: Int)
 
-class SerializerTest extends FunSuite with PropertyChecks {
+class SerializerTest extends AnyFunSuite with ScalaCheckPropertyChecks {
 
   def testSerializeAndDeserialize[T](o: T): Unit = {
     val serializer = new Serializer

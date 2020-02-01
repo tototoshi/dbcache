@@ -6,9 +6,11 @@ import java.time.Clock
 import com.github.tototoshi.dbcache.{CacheEntry, ConnectionFactory}
 import com.github.tototoshi.dbcache.util.Control
 import org.flywaydb.core.Flyway
-import org.scalatest.{Matchers, Outcome, fixture}
+import org.scalatest.{Outcome, fixture}
+import org.scalatest.funsuite
+import org.scalatest.matchers.should.Matchers
 
-class PostgreSQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control {
+class PostgreSQLCacheDatabaseTest extends funsuite.FixtureAnyFunSuite with Matchers with Control {
 
   override type FixtureParam = ConnectionFactory
 
@@ -20,9 +22,12 @@ class PostgreSQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Co
   override protected def withFixture(test: OneArgTest): Outcome = {
 
     def migrate(): Unit = {
-      val flyway = new Flyway()
-      flyway.setDataSource(url, name, password)
-      flyway.setLocations("migration/postgresql")
+      val flyway = Flyway
+        .configure
+        .dataSource(url, name, password)
+        .locations("migration/postgresql")
+        .load()
+   
       flyway.clean()
       flyway.migrate()
     }
@@ -53,11 +58,11 @@ class PostgreSQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Co
 
     Thread.sleep(expiration)
 
-    cache.get("key") should be('empty)
+    cache.get("key") should be(Symbol("empty"))
 
     cache.remove("key")
 
-    cache.get("key") should be('empty)
+    cache.get("key") should be(Symbol("empty"))
   }
 
 }
