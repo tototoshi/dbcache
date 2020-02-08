@@ -1,18 +1,19 @@
 name := """dbcache"""
 
-lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.15"
-lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.2.5"
+lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.19"
+lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.2.9"
 
 lazy val testDependencies = Seq(
-  "org.flywaydb" % "flyway-core" % "5.2.4" % "test",
-  "org.scalatest" %% "scalatest" % "3.0.7" % "test",
-  "org.scalacheck" %% "scalacheck" % "1.14.0" % "test"
+  "org.flywaydb" % "flyway-core" % "6.2.1" % "test",
+  "org.scalatest" %% "scalatest" % "3.1.0" % "test",
+  "org.scalatestplus" %% "scalacheck-1-14" % "3.1.0.1" % "test"
 )
 
 lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
-  scalaVersion := "2.12.8",
-  crossScalaVersions := Seq("2.12.8", "2.11.12"),
+  scalacOptions ++= Seq("-deprecation"),
+  scalaVersion := "2.12.10",
+  crossScalaVersions := Seq("2.13.1", "2.12.10"),
   version := "0.3.0"
 )
 
@@ -58,7 +59,7 @@ lazy val play = (project in file("play"))
   .settings(
     name := "dbcache-play",
     libraryDependencies ++= testDependencies ++ Seq(
-      cache
+      cacheApi
     )
 ).dependsOn(core)
 
@@ -83,8 +84,8 @@ lazy val examplePlay = (project in file("example-play"))
       guice,
       mysqlDependency,
       postgresqlDependency,
-      "org.scalikejdbc" %% "scalikejdbc" % "3.3.4",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "3.3.4",
+      "org.scalikejdbc" %% "scalikejdbc" % "3.4.0",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "3.4.0",
       "org.flywaydb" %% "flyway-play" % "5.3.2"
     )
 ).dependsOn(mysql, postgresql, play)

@@ -5,9 +5,11 @@ import java.sql.DriverManager
 import com.github.tototoshi.dbcache.util.Control
 import com.github.tototoshi.dbcache.{CacheEntry, ConnectionFactory}
 import org.flywaydb.core.Flyway
-import org.scalatest.{Matchers, Outcome, fixture}
+import org.scalatest.{Outcome, fixture}
+import org.scalatest.funsuite
+import org.scalatest.matchers.should.Matchers
 
-class MySQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control {
+class MySQLCacheDatabaseTest extends funsuite.FixtureAnyFunSuite with Matchers with Control {
 
   override type FixtureParam = ConnectionFactory
 
@@ -19,9 +21,12 @@ class MySQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control
   override protected def withFixture(test: OneArgTest): Outcome = {
 
     def migrate(): Unit = {
-      val flyway = new Flyway()
-      flyway.setDataSource(url, name, password)
-      flyway.setLocations("migration/mysql")
+      val flyway = Flyway
+        .configure
+        .dataSource(url, name, password)
+        .locations("migration/mysql")
+        .load()
+
       flyway.clean()
       flyway.migrate()
     }
@@ -52,11 +57,11 @@ class MySQLCacheDatabaseTest extends fixture.FunSuite with Matchers with Control
 
     Thread.sleep(expiration + 1000 /* mysql datetime doesn't have millisecond information */)
 
-    cache.get("key") should be('empty)
+    cache.get("key") should be(Symbol("empty"))
 
     cache.remove("key")
 
-    cache.get("key") should be('empty)
+    cache.get("key") should be(Symbol("empty"))
   }
 
 }
