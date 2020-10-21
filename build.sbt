@@ -14,7 +14,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation"),
   scalaVersion := "2.12.10",
   crossScalaVersions := Seq("2.13.1", "2.12.10"),
-  version := "0.4.0-SNAPSHOT"
+  version := "0.4.0"
 )
 
 lazy val root = (project in file("."))

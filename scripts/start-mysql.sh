@@ -10,7 +10,7 @@ container_id=$(docker run \
        -d mysql:5.7)
 
 echo -n 'Starting mysql'
-for i in $(seq 1 10)
+for i in $(seq 1 15)
 do
     echo -n '.'
     sleep 1

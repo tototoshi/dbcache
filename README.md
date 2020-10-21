@@ -7,10 +7,10 @@ RDB as cache storage
 ## Install
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.3.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.4.0"
 
 // or
-// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.3.0"
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.4.0"
 ```
 
 ## Setup
@@ -111,7 +111,7 @@ Tue Apr 26 22:26:57 JST 2016: None
 Add dbcache-play to dependencies.
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "0.3.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "0.4.0"
 ```
 
 The code below is Play integration example with scalikejdbc
@@ -141,7 +141,7 @@ class MySQLCacheApiProvider @Inject()(environment: Environment) extends Provider
 }
 ```
 
-Disable EhCache which is the default cache backend of Play 2.7.
+Disable EhCache which is the default cache backend of Play.
 
 ```
 play.modules.disabled += "play.api.cache.ehcache.EhCacheModule"
