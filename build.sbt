@@ -1,6 +1,6 @@
 name := """dbcache"""
 
-lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.19"
+lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.23"
 lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.2.9"
 
 lazy val testDependencies = Seq(
