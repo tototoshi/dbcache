@@ -17,5 +17,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name: Start MySQL
+      run: ./scripts/start-mysql.sh
+    - name: Start PostgreSQL
+      run: ./scripts/start-postgresql.sh
     - name: Run tests
       run: sbt +test
