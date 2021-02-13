@@ -18,7 +18,7 @@ done
 echo ''
 
 # Allow user to access from outside of container without password
-docker exec -it $container_id \
+docker exec $container_id \
        mysql -h 127.0.0.1 -u root -e "
 GRANT ALL PRIVILEGES ON dbcache_test.* to 'travis'@'%' IDENTIFIED by '' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
