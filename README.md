@@ -1,6 +1,8 @@
 # dbcache
 
-RDB as cache storage
+![Scala CI](https://github.com/tototoshi/dbcache/workflows/Scala%20CI/badge.svg)
+
+RDB as a cache storage
 
 ## Install
 
