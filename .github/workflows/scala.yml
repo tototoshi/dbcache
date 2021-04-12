@@ -17,7 +17,8 @@ jobs:
     - name: Set up JDK 1.8
       uses: actions/setup-java@v2
       with:
-        java-version: 1.8
+        distribution: "adopt"
+        java-version: 8
     - name: Start MySQL
       run: ./scripts/start-mysql.sh
     - name: Start PostgreSQL
