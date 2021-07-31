@@ -26,8 +26,8 @@ class HomeController @Inject() (
   }
 
   def get(key: String) = Action {
-    val value1 = mysqlCacheApi.get(key)
-    val value2 = postgresqlCacheApi.get(key)
+    val value1 = mysqlCacheApi.get[Any](key)
+    val value2 = postgresqlCacheApi.get[Any](key)
     Ok((value1, value2).toString)
   }
 

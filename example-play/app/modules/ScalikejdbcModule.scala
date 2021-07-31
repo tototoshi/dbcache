@@ -13,7 +13,7 @@ import scala.concurrent.{ExecutionContext, Future}
 class MySQLConnectionPoolProvider extends Provider[ConnectionPool] {
   private val logger = Logger(classOf[MySQLConnectionPoolProvider])
   override def get(): ConnectionPool = {
-    val jdbc = TypesafeConfigReader.readJDBCSettings('mysql)
+    val jdbc = TypesafeConfigReader.readJDBCSettings("mysql")
     logger.info("Preparing connection pool...")
     Commons2ConnectionPoolFactory(jdbc.url, jdbc.user, jdbc.password)
   }
@@ -22,7 +22,7 @@ class MySQLConnectionPoolProvider extends Provider[ConnectionPool] {
 class PostgreSQLConnectionPoolProvider extends Provider[ConnectionPool] {
   private val logger = Logger(classOf[PostgreSQLConnectionPoolProvider])
   override def get(): ConnectionPool = {
-    val jdbc = TypesafeConfigReader.readJDBCSettings('postgresql)
+    val jdbc = TypesafeConfigReader.readJDBCSettings("postgresql")
     logger.info("Preparing connection pool...")
     Commons2ConnectionPoolFactory(jdbc.url, jdbc.user, jdbc.password)
   }
