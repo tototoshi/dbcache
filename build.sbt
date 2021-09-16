@@ -12,8 +12,8 @@ lazy val testDependencies = Seq(
 lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
-  scalaVersion := "2.12.13",
-  crossScalaVersions := Seq("2.13.6", "2.12.13"),
+  scalaVersion := "2.12.15",
+  crossScalaVersions := Seq("2.13.6", "2.12.15"),
   version := "0.4.1-SNAPSHOT"
 )
 
