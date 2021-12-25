@@ -1,19 +1,19 @@
 name := """dbcache"""
 
-lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.26"
-lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.2.23"
+lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.27"
+lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.3.1"
 
 lazy val testDependencies = Seq(
-  "org.flywaydb" % "flyway-core" % "7.12.0" % "test",
-  "org.scalatest" %% "scalatest" % "3.2.9" % "test",
+  "org.flywaydb" % "flyway-core" % "7.15.0" % "test",
+  "org.scalatest" %% "scalatest" % "3.2.10" % "test",
   "org.scalatestplus" %% "scalacheck-1-15" % "3.2.9.0" % "test"
 )
 
 lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
-  scalaVersion := "2.12.13",
-  crossScalaVersions := Seq("2.13.6", "2.12.13", "3.0.1"),
+  scalaVersion := "2.12.15",
+  crossScalaVersions := Seq("2.13.7", "2.12.15", "3.0.1"),
   version := "0.4.1-SNAPSHOT"
 )
 
