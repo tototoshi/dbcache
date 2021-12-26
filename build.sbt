@@ -14,7 +14,7 @@ lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
   scalaVersion := "2.12.15",
-  crossScalaVersions := Seq("2.13.7", "2.12.15", "3.0.2"),
+  crossScalaVersions := Seq("2.13.7", "2.12.15", "3.1.0"),
   version := "0.4.1-SNAPSHOT"
 )
 
@@ -106,8 +106,8 @@ lazy val examplePlay = (project in file("example-play"))
       guice,
       mysqlDependency,
       postgresqlDependency,
-      "org.scalikejdbc" %% "scalikejdbc" % "4.0.0-RC2",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "4.0.0-RC2",
+      "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "4.0.0",
       "org.flywaydb" %% "flyway-play" % "7.18.0" cross CrossVersion.for3Use2_13
     ),
     playScala3workaround,
