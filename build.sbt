@@ -108,7 +108,7 @@ lazy val examplePlay = (project in file("example-play"))
       postgresqlDependency,
       "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
       "org.scalikejdbc" %% "scalikejdbc-config" % "4.0.0",
-      "org.flywaydb" %% "flyway-play" % "7.18.0" cross CrossVersion.for3Use2_13
+      "org.flywaydb" %% "flyway-play" % "7.19.0" cross CrossVersion.for3Use2_13
     ),
     playScala3workaround,
 ).dependsOn(mysql, postgresql, play)
