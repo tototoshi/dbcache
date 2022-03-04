@@ -4,8 +4,8 @@ lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.28"
 lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.3.3"
 
 lazy val testDependencies = Seq(
-  "org.flywaydb" % "flyway-core" % "8.5.1" % "test",
-  "org.flywaydb" % "flyway-mysql" % "8.5.1" % "test",
+  "org.flywaydb" % "flyway-core" % "8.5.2" % "test",
+  "org.flywaydb" % "flyway-mysql" % "8.5.2" % "test",
   "org.scalatest" %% "scalatest" % "3.2.11" % "test",
   "org.scalatestplus" %% "scalacheck-1-15" % "3.2.11.0" % "test"
 )
