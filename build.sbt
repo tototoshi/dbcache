@@ -7,7 +7,7 @@ lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % "8.5.13" % "test",
   "org.flywaydb" % "flyway-mysql" % "8.5.13" % "test",
   "org.scalatest" %% "scalatest" % "3.2.12" % "test",
-  "org.scalatestplus" %% "scalacheck-1-15" % "3.2.11.0" % "test"
+  "org.scalatestplus" %% "scalacheck-1-16" % "3.2.12.0" % "test"
 )
 
 lazy val commonSettings = Seq(
