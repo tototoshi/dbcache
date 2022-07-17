@@ -25,6 +25,7 @@ class MySQLCacheDatabaseTest extends funsuite.FixtureAnyFunSuite with Matchers w
         .configure
         .dataSource(url, name, password)
         .locations("migration/mysql")
+        .cleanDisabled(false)
         .load()
 
       flyway.clean()

@@ -26,6 +26,7 @@ class PostgreSQLCacheDatabaseTest extends funsuite.FixtureAnyFunSuite with Match
         .configure
         .dataSource(url, name, password)
         .locations("migration/postgresql")
+        .cleanDisabled(false)
         .load()
    
       flyway.clean()
