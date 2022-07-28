@@ -2,7 +2,7 @@ name := """dbcache"""
 
 lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.29"
 lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.4.0"
-lazy val flywayVersion = "9.0.1"
+lazy val flywayVersion = "9.0.3"
 
 lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % flywayVersion % "test",
