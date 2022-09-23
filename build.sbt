@@ -1,8 +1,8 @@
 name := """dbcache"""
 
 lazy val mysqlDependency = "mysql" % "mysql-connector-java" % "8.0.30"
-lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.4.0"
-lazy val flywayVersion = "9.1.2"
+lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.4.2"
+lazy val flywayVersion = "9.1.6"
 
 lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % flywayVersion % "test",
@@ -15,7 +15,7 @@ lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
   scalaVersion := "2.12.17",
-  crossScalaVersions := Seq("2.13.8", "2.12.17", "3.1.3"),
+  crossScalaVersions := Seq("2.13.8", "2.12.17", "3.2.0"),
   version := "0.4.1-SNAPSHOT"
 )
 
@@ -109,7 +109,7 @@ lazy val examplePlay = (project in file("example-play"))
       postgresqlDependency,
       "org.scalikejdbc" %% "scalikejdbc" % "4.0.0",
       "org.scalikejdbc" %% "scalikejdbc-config" % "4.0.0",
-      "org.flywaydb" %% "flyway-play" % "7.22.0" cross CrossVersion.for3Use2_13
+      "org.flywaydb" %% "flyway-play" % "7.24.0" cross CrossVersion.for3Use2_13
     ),
     playScala3workaround,
 ).dependsOn(mysql, postgresql, play)
