@@ -14,11 +14,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up JDK 1.8
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        distribution: "adopt"
-        java-version: 8
+        distribution: "temurin"
+        java-version: 11
     - name: Start MySQL
       run: ./scripts/start-mysql.sh
     - name: Start PostgreSQL
