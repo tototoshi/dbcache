@@ -17,7 +17,7 @@ lazy val commonSettings = Seq(
   scalacOptions ++= Seq("-deprecation"),
   scalaVersion := "2.13.12",
   crossScalaVersions := Seq("2.13.12", "3.3.1"),
-  version := "0.5.0"
+  version := "1.0.0"
 )
 
 lazy val playScala3workaround = Def.settings(

@@ -7,10 +7,10 @@ RDB as a cache storage
 ## Install
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "0.5.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-mysql" % "1.0.0"
 
 // or
-// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "0.5.0"
+// libraryDependencies += "com.github.tototoshi" %% "dbcache-postgresql" % "1.0.0"
 ```
 
 ## Setup
@@ -110,6 +110,7 @@ Tue Apr 26 22:26:57 JST 2016: None
 
 |dbcache-play version|Play version|Scala version|
 |-------------------:|-----------:|------------:|
+|1.0.0               |3.0.x       |2.13/3.3     |
 |0.5.0               |2.9.x       |2.13/3.3     |
 |0.4.0               |2.8.x       |2.12/2.13    |
 
@@ -117,7 +118,7 @@ Tue Apr 26 22:26:57 JST 2016: None
 Add dbcache-play to dependencies.
 
 ```scala
-libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "0.5.0"
+libraryDependencies += "com.github.tototoshi" %% "dbcache-play" % "1.0.0"
 ```
 
 The code below is Play integration example with scalikejdbc
