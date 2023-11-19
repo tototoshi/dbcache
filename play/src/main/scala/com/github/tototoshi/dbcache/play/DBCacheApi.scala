@@ -1,6 +1,6 @@
 package com.github.tototoshi.dbcache.play
 
-import akka.Done
+import org.apache.pekko.Done
 import com.github.tototoshi.dbcache.DBCache
 import play.api.cache.{AsyncCacheApi, SyncCacheApi}
 
