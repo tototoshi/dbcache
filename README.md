@@ -106,7 +106,7 @@ Tue Apr 26 22:26:57 JST 2016: None
 ```
 
 
-## With Play framework4_.
+## With Play framework
 
 |dbcache-play version|Play version|Scala version|
 |-------------------:|-----------:|------------:|
