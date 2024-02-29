@@ -16,7 +16,7 @@ lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
   scalaVersion := "2.13.12",
-  crossScalaVersions := Seq("2.13.12", "3.3.1"),
+  crossScalaVersions := Seq("2.13.12", "3.3.3"),
   version := "1.0.0"
 )
 
