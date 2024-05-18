@@ -2,21 +2,21 @@ name := """dbcache"""
 
 lazy val mysqlDependency = "com.mysql" % "mysql-connector-j" % "8.3.0"
 
-lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.7.1"
+lazy val postgresqlDependency = "org.postgresql" % "postgresql" % "42.7.3"
 lazy val flywayVersion = "9.8.2"
 
 lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % flywayVersion % "test",
   "org.flywaydb" % "flyway-mysql" % flywayVersion % "test",
-  "org.scalatest" %% "scalatest" % "3.2.17" % "test",
+  "org.scalatest" %% "scalatest" % "3.2.18" % "test",
   "org.scalatestplus" %% "scalacheck-1-17" % "3.2.18.0" % "test"
 )
 
 lazy val commonSettings = Seq(
   organization := "com.github.tototoshi",
   scalacOptions ++= Seq("-deprecation"),
-  scalaVersion := "2.13.12",
-  crossScalaVersions := Seq("2.13.12", "3.3.1"),
+  scalaVersion := "2.13.13",
+  crossScalaVersions := Seq("2.13.13", "3.3.1"),
   version := "1.0.0"
 )
 
@@ -108,8 +108,8 @@ lazy val examplePlay = (project in file("example-play"))
       guice,
       mysqlDependency,
       postgresqlDependency,
-      "org.scalikejdbc" %% "scalikejdbc" % "4.2.0",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "4.2.0",
+      "org.scalikejdbc" %% "scalikejdbc" % "4.2.1",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "4.2.1",
       "org.flywaydb" %% "flyway-play" % "9.0.0" cross CrossVersion.for3Use2_13,
       "org.flywaydb" % "flyway-mysql" % flywayVersion
     ),
