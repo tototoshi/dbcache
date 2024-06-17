@@ -1,4 +1,4 @@
-addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.2")
+addSbtPlugin("org.playframework" % "sbt-plugin" % "3.0.4")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype" % "3.10.0")
 
