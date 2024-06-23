@@ -8,7 +8,7 @@ lazy val flywayVersion = "9.8.2"
 lazy val testDependencies = Seq(
   "org.flywaydb" % "flyway-core" % flywayVersion % "test",
   "org.flywaydb" % "flyway-mysql" % flywayVersion % "test",
-  "org.scalatest" %% "scalatest" % "3.2.18" % "test",
+  "org.scalatest" %% "scalatest" % "3.2.19" % "test",
   "org.scalatestplus" %% "scalacheck-1-17" % "3.2.18.0" % "test"
 )
 
