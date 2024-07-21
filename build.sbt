@@ -108,8 +108,8 @@ lazy val examplePlay = (project in file("example-play"))
       guice,
       mysqlDependency,
       postgresqlDependency,
-      "org.scalikejdbc" %% "scalikejdbc" % "4.3.0",
-      "org.scalikejdbc" %% "scalikejdbc-config" % "4.3.0",
+      "org.scalikejdbc" %% "scalikejdbc" % "4.3.1",
+      "org.scalikejdbc" %% "scalikejdbc-config" % "4.3.1",
       "org.flywaydb" %% "flyway-play" % "9.1.0" cross CrossVersion.for3Use2_13,
       "org.flywaydb" % "flyway-mysql" % flywayVersion
     ),
