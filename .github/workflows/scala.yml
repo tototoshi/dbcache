@@ -19,6 +19,8 @@ jobs:
       with:
         distribution: "temurin"
         java-version: 11
+    - name: Set up sbt
+      uses: sbt/setup-sbt@v1
     - name: Start MySQL
       run: ./scripts/start-mysql.sh
     - name: Start PostgreSQL
